@@ -1,4 +1,4 @@
-import { GeneratePlaylistUseCase } from "@/domain/music/use-cases/generate-playlist";
+import { GeneratePlaylistUseCase } from "@/domain/use-cases/generate-playlist";
 import { Controller, Get, Query } from "@nestjs/common";
 
 @Controller('music')

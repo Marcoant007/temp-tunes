@@ -1,7 +1,15 @@
+import { Injectable, NotFoundException } from "@nestjs/common";
+import axios from "axios";
+import 'dotenv/config';
+import { TemperatureUseCase } from "./weathermap/temperature-use-case";
+
+@Injectable()
 export class GeneratePlaylistUseCase implements IGeneratePlaylistInterface {
-   
+    constructor(private temperatureUseCase: TemperatureUseCase) {}
+
     async generatePlaylist(city: string): Promise<string[]> {
-        const temperature = await this.getTemperature(city); 
+        const temperature = await this.temperatureUseCase.getTemperature(city);
+        console.log('Temperatura', temperature);
         let playlist: string[];
 
         if (temperature > 25) {
@@ -14,9 +22,4 @@ export class GeneratePlaylistUseCase implements IGeneratePlaylistInterface {
 
         return playlist;
     }
-
-    async getTemperature(city: string) {
-        return 20;
-    }
-
 }
