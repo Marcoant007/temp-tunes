@@ -1,5 +1,4 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import axios from "axios";
+import { Injectable } from "@nestjs/common";
 import 'dotenv/config';
 import { TemperatureUseCase } from "./weathermap/temperature-use-case";
 
