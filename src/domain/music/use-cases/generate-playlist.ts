@@ -1,5 +1,6 @@
 export class GeneratePlaylistUseCase implements IGeneratePlaylistInterface {
-   async generatePlaylist(city: string): Promise<string[]> {
+   
+    async generatePlaylist(city: string): Promise<string[]> {
         const temperature = await this.getTemperature(city); 
         let playlist: string[];
 
@@ -13,7 +14,8 @@ export class GeneratePlaylistUseCase implements IGeneratePlaylistInterface {
 
         return playlist;
     }
-    getTemperature(city: string) {
+
+    async getTemperature(city: string) {
         return 20;
     }
 
