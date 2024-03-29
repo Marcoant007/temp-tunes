@@ -2,12 +2,14 @@ import { GenreEnum } from '@/core/enum/genre-enum';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import axios from 'axios';
 import 'dotenv/config';
+import { TrackTokenUseCase } from './token/generate-token-use-case';
 
 @Injectable()
-export class searchTrackUseCase implements ISearchTrackInterface {
+export class SearchTrackUseCase implements ISearchTrackInteface {
+  constructor(private trackTokenUseCase: TrackTokenUseCase) {}
 
   async searchTracksByGenre(genre: GenreEnum): Promise<TrackDTO[]> {
-    const authToken = await this.getToken();
+    const authToken = await this.trackTokenUseCase.generateToken();
     const urlSearch = process.env.SPOTIFY_SEARCH_URL || "";
     try {
       const response = await axios.get(urlSearch, {
@@ -37,27 +39,6 @@ export class searchTrackUseCase implements ISearchTrackInterface {
     } catch (error) {
       console.error('Erro ao buscar faixas por gênero:', error);
       return [];
-    }
-  }
-
-  async getToken(): Promise<string> {
-    try {
-      const data = new URLSearchParams();
-      const oauthUrl = process.env.SPOTIFY_TOKEN_URL || '';
-      data.append('grant_type', 'client_credentials');
-      data.append('client_id', process.env.SPOTIFY_ID_CLIENT || '');
-      data.append('client_secret', process.env.SPOTIFY_SECRET || '');
-
-      const headers = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': `Basic ${Buffer.from(`${process.env.SPOTIFY_ID_CLIENT}:${process.env.SPOTIFY_SECRET}`).toString('base64')}`
-      };
-
-      const response = await axios.post(oauthUrl, data, { headers });
-      return response.data.access_token;
-    } catch (error) {
-      console.error('Erro ao obter token de acesso:', error);
-      throw error;
     }
   }
 }

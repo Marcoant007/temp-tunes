@@ -1,11 +1,11 @@
 import { GenreEnum } from "@/core/enum/genre-enum";
 import { Injectable } from "@nestjs/common";
 import { TemperatureUseCase } from "../temperature/temperature-use-case";
-import { searchTrackUseCase } from "../track/search-track-use-case";
+import { SearchTrackUseCase } from "../track/search-track-use-case";
 
 @Injectable()
 export class GeneratePlaylistUseCase implements IGeneratePlaylistInterface {
-    constructor(private temperatureUseCase: TemperatureUseCase, private spotifyUseCase: searchTrackUseCase) {}
+    constructor(private temperatureUseCase: TemperatureUseCase, private spotifyUseCase: SearchTrackUseCase) {}
 
     async generatePlaylist(city: string): Promise<ResponseDTO> {
         const temperature = await this.temperatureUseCase.getTemperature(city);
