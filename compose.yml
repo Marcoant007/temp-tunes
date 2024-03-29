@@ -1,13 +1,42 @@
-version: '3.8'
-
 services:
- postgres:
-   container_name: desafio-backend-db
-   image: postgres
-   ports:
-     - 5432:5432
-   environment:
-     POSTGRES_USER: postgres
-     POSTGRES_PASSWORD: docker
-     POSTGRES_DB: desafio-db
-     PGDATA: /data/postgres
+  app:
+    build: .
+    image: nest-desafio-app
+    container_name: nest-desafio-app
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - redis
+      - redis-commander
+
+  redis:
+    container_name: redis-cache
+    image: bitnami/redis:latest
+    restart: always
+    ports:
+      - 6379:6379
+    expose:
+      - 6379
+    volumes:
+      - redis-data:/bitnami/redis/data
+    environment:
+      - REDIS_PASSWORD=desafio123
+
+  redis-commander:
+    container_name: redis-commander-dashboard
+    image: ghcr.io/joeferner/redis-commander:latest
+    restart: always
+    ports:
+      - 8081:8081
+    expose:
+      - 8081
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=desafio123
+
+volumes:
+  redis-data:
