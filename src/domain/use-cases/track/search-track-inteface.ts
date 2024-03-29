@@ -1,4 +1,3 @@
-interface ISearchTrackInterface {
+interface ISearchTrackInteface {
     searchTracksByGenre(genre: string): Promise<TrackDTO[]>;
-    getToken(): Promise<string>;
 }
