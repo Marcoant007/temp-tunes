@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import axios from "axios";
 
 @Injectable()
-export class GenerateTrackToken implements IGenerateTrackToken {
+export class GenerateTrackTokenUseCase implements IGenerateTrackTokenInterface {
     async generateToken(): Promise<string> {
         try {
           const data = new URLSearchParams();

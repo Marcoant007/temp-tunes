@@ -2,11 +2,11 @@ import { GenreEnum } from '@/core/enum/genre-enum';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import axios from 'axios';
 import 'dotenv/config';
-import { GenerateTrackToken } from './token/generate-track-token-use-case';
+import { GenerateTrackTokenUseCase } from './token/generate-track-token-use-case';
 
 @Injectable()
 export class SearchTrackUseCase implements ISearchTrackInteface {
-  constructor(private trackTokenUseCase: GenerateTrackToken) {}
+  constructor(private trackTokenUseCase: GenerateTrackTokenUseCase) {}
 
   async searchTracksByGenre(genre: GenreEnum): Promise<TrackDTO[]> {
     const authToken = await this.trackTokenUseCase.generateToken();

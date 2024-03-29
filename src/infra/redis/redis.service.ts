@@ -18,11 +18,30 @@ export class RedisService implements IRedisService {
       if (cached) {
         return JSON.parse(cached);
       }
+      console.log("buscando no cache: ", key);
+      console.log("cache", cached)
     } catch (error) {
       this.logger.error('Failed to get cache, Trace:', error);
       return null;
     }
   }
+
+  public async getAll(pattern: string): Promise<any> {
+    try {
+      const keys = await this.redisRead.keys(pattern);
+      if (keys && keys.length > 0) {
+        const values = await this.redisRead.mget(...keys);
+        return keys.map((key, index) => ({
+          key,
+          value: values[index]
+        }));
+      }
+      return [];
+    } catch (error) {
+      this.logger.error('Failed to get all cache, Trace:', error);
+      return null;
+    }
+}
 
   public async set(key: string, value: any, ttl?: number): Promise<any> {
     try {

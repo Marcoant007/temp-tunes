@@ -19,7 +19,7 @@ export class TemperatureUseCase implements ITemperatureInterface {
         throw new NotFoundException('Cidade não encontrada');
       }
 
-      this.redisService.set('city-statistics:', response.data, 10000);
+      this.redisService.set('city-statistics:' + city, response.data, 10000);
       return response.data.main.temp;
     } catch (error) {
       console.error('Erro ao buscar a temperatura:', error);

@@ -2,7 +2,6 @@ import { GenreEnum } from "@/core/enum/genre-enum";
 import { Injectable } from "@nestjs/common";
 import { TemperatureUseCase } from "../temperature/temperature-use-case";
 import { SearchTrackUseCase } from "../track/search-track-use-case";
-import { RedisService } from "@/infra/redis/redis.service";
 
 @Injectable()
 export class GeneratePlaylistUseCase implements IGeneratePlaylistInterface {

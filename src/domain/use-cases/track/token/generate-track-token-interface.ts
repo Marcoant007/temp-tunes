@@ -1,3 +1,3 @@
-interface IGenerateTrackToken {
+interface IGenerateTrackTokenInterface {
     generateToken(): Promise<string>;
 }

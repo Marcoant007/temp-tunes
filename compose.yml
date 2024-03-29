@@ -1,16 +1,16 @@
 services:
-  app:
-    build: .
-    image: nest-desafio-app
-    container_name: nest-desafio-app
-    restart: always
-    ports:
-      - 3000:3000
-    volumes:
-      - .:/usr/src/app
-    depends_on:
-      - redis
-      - redis-commander
+  # app:
+  #   build: .
+  #   image: nest-desafio-app
+  #   container_name: nest-desafio-app
+  #   restart: always
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - .:/usr/src/app
+  #   depends_on:
+  #     - redis
+  #     - redis-commander
 
   redis:
     container_name: redis-cache
