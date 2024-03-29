@@ -2,11 +2,11 @@ import { GenreEnum } from '@/core/enum/genre-enum';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import axios from 'axios';
 import 'dotenv/config';
-import { TrackTokenUseCase } from './token/generate-token-use-case';
+import { GenerateTrackToken } from './token/generate-track-token-use-case';
 
 @Injectable()
 export class SearchTrackUseCase implements ISearchTrackInteface {
-  constructor(private trackTokenUseCase: TrackTokenUseCase) {}
+  constructor(private trackTokenUseCase: GenerateTrackToken) {}
 
   async searchTracksByGenre(genre: GenreEnum): Promise<TrackDTO[]> {
     const authToken = await this.trackTokenUseCase.generateToken();
@@ -32,7 +32,6 @@ export class SearchTrackUseCase implements ISearchTrackInteface {
       const tracks: TrackDTO[] = response.data.tracks.items.map((item: any) => ({
         artist: item.artists[0].name, 
         track: item.name,
-        popularity: item.popularity
       }));
 
       return tracks;

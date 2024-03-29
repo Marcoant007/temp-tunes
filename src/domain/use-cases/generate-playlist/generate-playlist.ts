@@ -2,10 +2,11 @@ import { GenreEnum } from "@/core/enum/genre-enum";
 import { Injectable } from "@nestjs/common";
 import { TemperatureUseCase } from "../temperature/temperature-use-case";
 import { SearchTrackUseCase } from "../track/search-track-use-case";
+import { RedisService } from "@/infra/redis/redis.service";
 
 @Injectable()
 export class GeneratePlaylistUseCase implements IGeneratePlaylistInterface {
-    constructor(private temperatureUseCase: TemperatureUseCase, private spotifyUseCase: SearchTrackUseCase) {}
+    constructor(private temperatureUseCase: TemperatureUseCase, private searchTrackUseCase: SearchTrackUseCase) {}
 
     async generatePlaylist(city: string): Promise<ResponseDTO> {
         const temperature = await this.temperatureUseCase.getTemperature(city);
@@ -14,13 +15,13 @@ export class GeneratePlaylistUseCase implements IGeneratePlaylistInterface {
 
         if (temperature > 25) {
             genre = GenreEnum.POP;
-            playlist = await this.spotifyUseCase.searchTracksByGenre(genre);
+            playlist = await this.searchTrackUseCase.searchTracksByGenre(genre);
         } else if (temperature >= 10 && temperature <= 25) {
             genre = GenreEnum.ROCK;
-            playlist = await this.spotifyUseCase.searchTracksByGenre(genre);
+            playlist = await this.searchTrackUseCase.searchTracksByGenre(genre);
         } else {
             genre = GenreEnum.CLASSICAL;
-            playlist = await this.spotifyUseCase.searchTracksByGenre(genre);
+            playlist = await this.searchTrackUseCase.searchTracksByGenre(genre);
         }
         const response: ResponseDTO = {
             city,

@@ -1,12 +1,16 @@
 import { GeneratePlaylistUseCase } from "@/domain/use-cases/generate-playlist/generate-playlist";
-import { Controller, Get, Query } from "@nestjs/common";
+import { CityValidationPipe } from "@/infra/pipes/city-validation.pipe";
+import { RedisService } from "@/infra/redis/redis.service";
+import { Controller, Get, Query, UsePipes } from "@nestjs/common";
 
 @Controller('music')
 export class MusicController {
     constructor(private readonly generatePlaylistUseCase: GeneratePlaylistUseCase) {}
 
     @Get('playlist')
+    @UsePipes(CityValidationPipe)
     async getPlaylist(@Query('city') city: string): Promise<ResponseDTO> {
-        return await this.generatePlaylistUseCase.generatePlaylist(city);
+        const playlist = await this.generatePlaylistUseCase.generatePlaylist(city);
+        return playlist
     }
 }
