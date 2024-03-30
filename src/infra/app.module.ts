@@ -20,7 +20,7 @@ import { LoggerModule } from 'nestjs-pino';
             colorize: true
           },
         },
-        level: 'info',
+        level: 'error',
       },
     }),
   ],
