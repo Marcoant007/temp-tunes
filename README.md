@@ -14,15 +14,18 @@ Um breve resumo do que o projeto faz e por que é importante.
 Além das funcionalidades básicas, o projeto oferece integrações com outros sistemas e serviços. As seguintes integrações estão disponíveis:
 
 - **API Spotify**:
-  <img src="https://i.ibb.co/8mX89Rk/spotify-logo-4-FFDEEE153-seeklogo-com.png" style="width:100px">
-  Esta integração permite acessar recursos da API do Spotify para obter informações sobre playlists e músicas com base nas preferências do usuário.
   
-  #
+  Esta integração permite acessar recursos da API do Spotify para obter informações sobre playlists e músicas com base nas preferências do usuário.
+
+   <img src="https://i.ibb.co/8mX89Rk/spotify-logo-4-FFDEEE153-seeklogo-com.png" style="width:100px">
+
+   #
 
 - **API Open Weather**:
-  <img src="https://i.ibb.co/LZXWyWy/images.png" style="width:100px">
+  
   Esta integração permite acessar recursos da API Open Weather para obter informações meteorológicas precisas de diferentes cidades em todo o mundo.
 
+   <img src="https://i.ibb.co/LZXWyWy/images.png" style="width:100px">
 ---
 ### Pré-requisitos
 
