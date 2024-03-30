@@ -1,8 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, Injectable, Logger } from "@nestjs/common";
 import axios from "axios";
 
 @Injectable()
 export class GenerateTrackTokenUseCase implements IGenerateTrackTokenInterface {
+  private readonly logger = new Logger(GenerateTrackTokenUseCase.name);
     async generateToken(): Promise<string> {
         try {
           const data = new URLSearchParams();
@@ -19,8 +20,8 @@ export class GenerateTrackTokenUseCase implements IGenerateTrackTokenInterface {
           const response = await axios.post(oauthUrl, data, { headers });
           return response.data.access_token;
         } catch (error) {
-          console.error('Erro ao obter token de acesso:', error);
-          throw error;
+          this.logger.error('Erro ao obter token de acesso:' + error);
+          throw new HttpException('OCorreu um erro ao obter o token de acesso', 404);
         }
       }
 }

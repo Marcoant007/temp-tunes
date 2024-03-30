@@ -1,13 +1,13 @@
-import { StaticsUseCase } from "@/domain/use-cases/temperature/statics-cityes/statics-use-case";
+import { StatisticsUseCase } from "@/domain/use-cases/temperature/statics-cityes/statics-use-case";
 import { Controller, Get } from "@nestjs/common";
 
-@Controller('statics')
-export class StaticsCityController {
-    constructor(private readonly staticsUseCase: StaticsUseCase) {}
+@Controller('statistics')
+export class StatisticsCityController {
+    constructor(private readonly StatisticsUseCase: StatisticsUseCase) {}
 
     @Get('/')
-    async getStatics(): Promise<CityDTO[]> {
-        const statics = await this.staticsUseCase.getStatics();
-        return statics
+    async findStatisticsCityes(): Promise<CityDTO[]> {
+        const Statistics = await this.StatisticsUseCase.getStatistics();
+        return Statistics
     }
 }

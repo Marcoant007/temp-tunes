@@ -18,8 +18,6 @@ export class RedisService implements IRedisService {
       if (cached) {
         return JSON.parse(cached);
       }
-      console.log("buscando no cache: ", key);
-      console.log("cache", cached)
     } catch (error) {
       this.logger.error('Failed to get cache, Trace:', error);
       return null;
@@ -45,7 +43,6 @@ export class RedisService implements IRedisService {
 
   public async set(key: string, value: any, ttl?: number): Promise<any> {
     try {
-      console.log("salvando no cache: ", key);
       await this.redisWrite.set(key, JSON.stringify(value));
       if(ttl){
         await this.redisWrite.expire(key, ttl);

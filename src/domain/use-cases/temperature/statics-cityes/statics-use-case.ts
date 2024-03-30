@@ -2,11 +2,11 @@ import { RedisService } from "@/infra/redis/redis.service";
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
-export class StaticsUseCase implements IStaticsInterface {
+export class StatisticsUseCase implements IStatisticsInterface {
 
     constructor(private readonly redisService: RedisService) {}
     
-    async getStatics(): Promise<CityDTO[]> {
+    async getStatistics(): Promise<CityDTO[]> {
         const redisKey = "city-statistics:"
         const allCityStatistics = await this.redisService.getAll(`${redisKey}*`);
     

@@ -1,11 +1,12 @@
-import { GenreEnum } from '@/core/enum/genre-enum';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { GenreEnum } from '@/core/enums/genre-enum';
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import axios from 'axios';
 import 'dotenv/config';
 import { GenerateTrackTokenUseCase } from './token/generate-track-token-use-case';
 
 @Injectable()
 export class SearchTrackUseCase implements ISearchTrackInteface {
+  private readonly logger = new Logger(SearchTrackUseCase.name);
   constructor(private trackTokenUseCase: GenerateTrackTokenUseCase) {}
 
   async searchTracksByGenre(genre: GenreEnum): Promise<TrackDTO[]> {
@@ -36,8 +37,8 @@ export class SearchTrackUseCase implements ISearchTrackInteface {
 
       return tracks;
     } catch (error) {
-      console.error('Erro ao buscar faixas por gênero:', error);
-      return [];
+      this.logger.error('Erro ao buscar faixas por gênero:' + error);
+      throw new Error('Erro ao buscar faixas por gênero');
     }
   }
 }

@@ -1,3 +1,3 @@
-interface IStaticsInterface{
-    getStatics(): Promise<any>;
+interface IStatisticsInterface{
+    getStatistics(): Promise<any>;
 }

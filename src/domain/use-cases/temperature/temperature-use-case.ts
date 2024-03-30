@@ -1,10 +1,11 @@
 import { RedisService } from "@/infra/redis/redis.service";
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { HttpException, Injectable, Logger, NotFoundException } from "@nestjs/common";
 import axios from "axios";
 import 'dotenv/config';
 
 @Injectable()
 export class TemperatureUseCase implements ITemperatureInterface {
+  private readonly logger = new Logger(TemperatureUseCase.name);
   constructor(private redisService: RedisService) { }
 
   async getTemperature(city: string): Promise<number> {
@@ -14,16 +15,16 @@ export class TemperatureUseCase implements ITemperatureInterface {
 
     try {
       const response = await axios.get(url);
-      console.log(response.data)
       if (response.data.cod === '404') {
-        throw new NotFoundException('Cidade não encontrada');
+        throw new HttpException(`${city} não foi encontrada`, 404);
       }
 
       this.redisService.set('city-statistics:' + city, response.data, 10000);
+      this.logger.log(`Temperatura da cidade ${city} salva no redis`);
       return response.data.main.temp;
     } catch (error) {
-      console.error('Erro ao buscar a temperatura:', error);
-      throw new Error('Erro ao buscar a temperatura');
+      this.logger.log('Erro ao buscar a temperatura:' + error);
+      throw new HttpException(`Ocorreu um erro ao buscar a temperatura da cidade: ${city}, verifique se o nome da cidade esta correto`, 404);
     }
   }
 }

@@ -1,4 +1,4 @@
-import { GenreEnum } from "@/core/enum/genre-enum";
+import { GenreEnum } from "@/core/enums/genre-enum";
 import { Injectable } from "@nestjs/common";
 import { TemperatureUseCase } from "../temperature/temperature-use-case";
 import { SearchTrackUseCase } from "../track/search-track-use-case";
