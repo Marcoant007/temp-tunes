@@ -1,6 +1,6 @@
-# Nome do Projeto
+# TempTunes
 
-Um breve resumo do que o projeto faz e por que é importante.
+é um serviço revolucionário que combina dados meteorológicos e preferências musicais para oferecer sugestões de músicas personalizadas aos usuários. Baseado em um estudo pioneiro que revelou a relação entre gêneros musicais e temperatura ambiente, TempTunes utiliza algoritmos avançados para sugerir trilhas sonoras perfeitas para cada clima.
 
 ## Tecnologias Utilizadas
 <img src="https://i.ibb.co/dtx6Td0/DOCKERZADA.png" width="100px"> <img src="https://i.ibb.co/1zJs410/REDIS.png" width="100px">  <img src="https://marcoantdeveloper.netlify.app/assets/img/icons/NESTJS.png" width="100px">
