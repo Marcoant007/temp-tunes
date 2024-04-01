@@ -9,7 +9,7 @@
 - Redis
 - Docker
 ---
-### Arquitetura
+## Arquitetura
 
 <img src="https://i.ibb.co/b3rm985/image.png">
 
