@@ -9,6 +9,11 @@
 - Redis
 - Docker
 ---
+### Arquitetura
+
+<img src="https://i.ibb.co/b3rm985/image.png">
+
+---
 ## Integrações
 
 Além das funcionalidades básicas, o projeto oferece integrações com outros sistemas e serviços. As seguintes integrações estão disponíveis:
